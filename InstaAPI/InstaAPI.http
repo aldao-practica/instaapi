@@ -1,0 +1,6 @@
+@InstaAPI_HostAddress = http://localhost:5135
+
+GET {{InstaAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
