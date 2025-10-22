@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Application.Features.Users.Commands.CreateUser;
 

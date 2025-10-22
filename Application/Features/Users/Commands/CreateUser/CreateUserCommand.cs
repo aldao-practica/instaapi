@@ -1,7 +1,6 @@
 ﻿using Application.Common;
 using Application.DTOs.Users;
 using MediatR;
-using System.Text.RegularExpressions;
 
 namespace Application.Features.Users.Commands.CreateUser;
 

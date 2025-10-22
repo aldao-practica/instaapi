@@ -1,5 +1,7 @@
 ﻿using Application.DTOs.Users;
 using Application.Features.Users.Commands.CreateUser;
+using Application.Features.Users.Commands.DeleteUser;
+using Application.Features.Users.Queries.GetUser;
 using Application.Features.Users.Queries.GetUserById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -52,5 +54,26 @@ public class UsersController : ControllerBase
             return NotFound(new { error = result.Error });
 
         return Ok(result.Data);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAllUsers()
+    {
+        var query = new GetAllUsersQuery();
+        var result = await _mediator.Send(query);
+
+        return Ok(result.Data);
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteUserById(Guid id)
+    {
+        var command = new DeleteUserCommand(id);
+        var result = await _mediator.Send(command);
+
+        if (!result.IsSuccess)
+            return NotFound(new { error = result.Error });
+
+        return NoContent();
     }
 }
