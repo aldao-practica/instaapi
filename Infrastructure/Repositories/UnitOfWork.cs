@@ -7,6 +7,7 @@ public class UnitOfWork : IUnitOfWork
 {
     private readonly ApplicationDbContext _context;
     private IUserRepository? _users;
+    private IPostRepository? _posts;
 
     public UnitOfWork(ApplicationDbContext context)
     {
@@ -14,6 +15,7 @@ public class UnitOfWork : IUnitOfWork
     }
 
     public IUserRepository Users => _users ??= new UserRepository(_context);
+    public IPostRepository Posts => _posts ??= new PostRepository(_context);
     //Lazy initialization: Solo se crea el repositorio cuando se usa por primera vez
     //??= es el operador de asignación con null-coalescing
     //Si _users es null, lo crea; si no, devuelve el existente

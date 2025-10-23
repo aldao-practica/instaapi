@@ -16,6 +16,7 @@
 
     {
         IUserRepository Users { get; }
+        IPostRepository Posts { get; }
         // Resto de repositorios al que querramos acceder...
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }

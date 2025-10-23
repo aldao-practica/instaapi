@@ -5,6 +5,7 @@ namespace InstaAPI.Mocks;
 public class MockUnitOfWork : IUnitOfWork
 {
     public IUserRepository Users { get; }
+    public IPostRepository Posts => throw new NotImplementedException();
 
     public MockUnitOfWork(MockUserRepository userRepository)
     {

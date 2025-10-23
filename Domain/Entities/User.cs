@@ -11,18 +11,12 @@ namespace Domain.Entities
         public string? Bio { get; private set; }
         public bool IsPrivate { get; private set; }
 
-        //private readonly List<Post> _posts = new();
-        //public IReadOnlyCollection<Post> Posts => _posts.AsReadOnly();
-
-        //private readonly List<Follow> _following = new();
-        //public IReadOnlyCollection<Follow> Following => _following.AsReadOnly();
-
-        //private readonly List<Follow> _followers = new();
-        //public IReadOnlyCollection<Follow> Followers => _followers.AsReadOnly();
+        private readonly List<Post> _posts = new();
+        public IReadOnlyCollection<Post> Posts => _posts.AsReadOnly();
 
         private User() { }
 
-        public static User Create(string username, string email, string passwordHash)
+        public static User Create(string username, string email, string passwordHash, Guid? countryId = null)
         {
             if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentException("Username no puede estar vacío", nameof(username));
@@ -44,7 +38,7 @@ namespace Domain.Entities
                 Username = username,
                 Email = email,
                 PasswordHash = passwordHash,
-                IsPrivate = false
+                IsPrivate = false,
             };
         }
 
