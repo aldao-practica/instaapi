@@ -3,7 +3,6 @@ using Application.DTOs.Users;
 using Application.Features.Users.Queries.GetUser;
 using Domain.Interfaces;
 using MediatR;
-using System.Text.Json;
 
 namespace Application.Features.Users.Queries.GetAllUsers;
 

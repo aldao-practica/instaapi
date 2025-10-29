@@ -1,6 +1,7 @@
 ﻿using Application.DTOs.Users;
 using Application.Features.Users.Commands.CreateUser;
 using Application.Features.Users.Commands.DeleteUser;
+using Application.Features.Users.Commands.UpdateUser;
 using Application.Features.Users.Queries.GetUser;
 using Application.Features.Users.Queries.GetUserById;
 using MediatR;
@@ -78,5 +79,31 @@ public class UsersController : ControllerBase
         //    return NotFound(new { error = result.Error });
 
         return NoContent();
+    }
+
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> UpdateUser(Guid id, [FromBody] UpdateUserDTO dto)
+    {
+        var command = new UpdateUserCommand(
+            id,
+            dto.Bio,
+            dto.ProfilePictureUrl,
+            dto.IsPrivate
+        );
+
+        var result = await _mediator.Send(command);
+
+        if (!result.IsSuccess)
+        {
+            //return result.ErrorType switch
+            //{
+            //    ErrorType.NotFound => NotFound(new { error = result.Error }),
+            //    ErrorType.Unauthorized => Unauthorized(new { error = result.Error }),
+            //    _ => BadRequest(new { error = result.Error })
+            //};
+            return BadRequest(new { error = result.Error });
+        }
+
+        return Ok(result.Data);
     }
 }
