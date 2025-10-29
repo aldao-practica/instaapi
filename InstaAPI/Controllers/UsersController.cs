@@ -71,8 +71,11 @@ public class UsersController : ControllerBase
         var command = new DeleteUserCommand(id);
         var result = await _mediator.Send(command);
 
-        if (!result.IsSuccess)
-            return NotFound(new { error = result.Error });
+        if (!result.IsSuccess && !string.IsNullOrEmpty(result.Error))
+            return BadRequest(new { error = result.Error });
+
+        //if (!result.IsSuccess)
+        //    return NotFound(new { error = result.Error });
 
         return NoContent();
     }

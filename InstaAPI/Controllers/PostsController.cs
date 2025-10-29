@@ -21,7 +21,7 @@ public class PostsController : Controller
     {
         // TODO: Obtener el UserId del usuario autenticado (JWT)
         // Por ahora lo pasamos en el body o hardcodeamos para testing
-        var userId = Guid.Parse("62e6ab69-e9d5-4fcb-95ae-944e2556385a");
+        var userId = Guid.Parse(dto.UserId);
 
         var command = new CreatePostCommand(userId, dto.Content);
         var result = await _mediator.Send(command);
